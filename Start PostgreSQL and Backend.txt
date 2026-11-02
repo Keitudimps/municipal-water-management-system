@@ -1,0 +1,39 @@
+START AQUAALERT (WINDOWS)
+
+Everything is already installed and set up. Each time you want to use the app:
+
+1. Check that PostgreSQL is running
+
+Open PowerShell:
+
+    Get-Service postgresql-x64-18
+
+If the status is `Running`, continue. If it is stopped, open PowerShell as
+Administrator and run:
+
+    Start-Service postgresql-x64-18
+
+2. Start the backend
+
+In a PowerShell terminal, run:
+
+    Set-Location 'C:\Users\keitu\aquaalert1\backend'
+    $node = "$env:LOCALAPPDATA\Programs\nodejs-v24\node-v24.22.2-win-x64"
+    $env:Path = "$node;$env:Path"
+    & "$node\npm.cmd" run dev
+
+Leave this terminal open. To confirm the backend is up, open
+<http://localhost:4000/health>. The response should show `"ok": true`.
+
+3. Start the app
+
+Open a second PowerShell terminal and run:
+
+    Set-Location 'C:\Users\keitu\aquaalert1\aquaalert'
+    flutter run -d chrome --web-port 5000
+
+Leave this terminal open. Open <http://localhost:5000/#/> for citizen reporting
+or <http://localhost:5000/#/dashboard> for the operations dashboard.
+
+To stop AquaAlert, press Ctrl+C in both terminals. Your admin account and data
+are already saved; you do not need to recreate them.

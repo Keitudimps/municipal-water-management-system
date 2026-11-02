@@ -1,0 +1,6 @@
+Start the frontend:
+Set-Location 'C:\Users\keitu\aquaalert1\aquaalert'
+flutter run -d chrome --web-port 5000 --dart-define=API_BASE=http://localhost:4000
+
+Open the citizen app at http://localhost:5000 or the admin dashboard at http://localhost:5000/#/dashboard.
+The dashboard requires a staff-number/password account. Create the first admin once with `npm run create-admin` from the backend folder, following the backend startup instructions.
